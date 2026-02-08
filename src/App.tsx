@@ -2,10 +2,12 @@ import {menuItems} from "./data/db.ts";
 import MenuItem from "./components/MenuItem.tsx";
 import {useOrder} from "./hooks/useOrder.ts";
 import OrderContents from "./components/OrderContents.tsx";
+import {OrderTotals} from "./components/OrderTotals.tsx";
+import {TipPercentajeForm} from "./components/TipPercentajeForm.tsx";
 
 function App() {
 
-    const { order, addItem } = useOrder();
+    const {order, addItem, removeItem} = useOrder();
 
     return (
         <>
@@ -14,7 +16,7 @@ function App() {
             </header>
 
 
-            <main className='max-w-7xl mx-auto py-2 bg-gray-50 grid md:grid-cols-2 gap-10'>
+            <main className='max-w-7xl mx-auto py-1 bg-gray-50 grid md:grid-cols-2 gap-10'>
                 <div className={'p-5'}>
                     <h2 className={'font-black text-4xl'}>Menu</h2>
 
@@ -31,9 +33,18 @@ function App() {
 
                 </div>
 
-                <div  className="border border-dashed border-slate-300 p-5 rounded-lg space-y-10">
+                <div className="border border-dashed border-slate-300 p-5 rounded-lg space-y-10">
                     <OrderContents
-                    order={ order }
+                        order={order}
+                        removeItem={removeItem}
+                    />
+
+                    <TipPercentajeForm
+
+                    />
+
+                    <OrderTotals
+                        order={order}
                     />
                 </div>
 

@@ -7,18 +7,23 @@ export const useOrder = () => {
     const addItem = (item: MenuItem) => {
         const itemExists = order.find(orderItem => orderItem.id === item.id)
         if (itemExists) {
-            const updatedOrder = order.map(orderItem => orderItem.id === item.id 
+            const updatedOrder = order.map(orderItem => orderItem.id === item.id
                 ? {...orderItem, quantity: orderItem.quantity + 1} : orderItem
             )
             setOrder(updatedOrder)
         } else {
-        const newItem: OrderItem = {...item, quantity: 1}
-        setOrder([...order, newItem])
+            const newItem: OrderItem = {...item, quantity: 1}
+            setOrder([...order, newItem])
         }
+    }
+
+    const removeItem = (id: MenuItem['id']) => {
+        setOrder(order.filter(orderItem => orderItem.id !== id))
     }
 
     return {
         order,
-        addItem
+        addItem,
+        removeItem,
     }
 };
