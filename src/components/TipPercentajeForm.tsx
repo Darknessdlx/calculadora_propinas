@@ -1,3 +1,5 @@
+import * as React from "react";
+
 const tipOptions = [
     {
         id: 'tip-10',
@@ -16,20 +18,27 @@ const tipOptions = [
     },
 ]
 
-export const TipPercentajeForm = () => {
+interface TipPercentajeFormProps {
+    setTip: React.Dispatch<React.SetStateAction<number>>;
+    tip: number;
+}
+
+export const TipPercentajeForm = ({ setTip, tip }: TipPercentajeFormProps) => {
     return (
         <div>
             <h2 className={'font-black text-2xl'}>Porcentaje de propina</h2>
 
             <form>
-                {tipOptions.map(tip => (
-                    <div className={'flex gap-2'} key={tip.id}>
-                        <label htmlFor={tip.id}>{tip.label}</label>
+                {tipOptions.map(tipOption => (
+                    <div className={'flex gap-2'} key={tipOption.id}>
+                        <label htmlFor={tipOption.id}>{tipOption.label}</label>
                         <input
-                            id={tip.id}
+                            id={tipOption.id}
                             type={'radio'}
                             name={'tip'}
-                            value={tip.value}
+                            value={tipOption.value}
+                            onChange={e => setTip(+e.target.value)}
+                            checked={tip === tipOption.value}
                         />
 
                     </div>
